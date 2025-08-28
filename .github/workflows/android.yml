@@ -25,6 +25,9 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
 
+    - name: Setup Android SDK
+      uses: android-actions/setup-android@v3
+
     - name: Cache Gradle packages
       uses: actions/cache@v3
       with:
@@ -38,14 +41,27 @@ jobs:
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
 
+    - name: Show build environment info
+      run: |
+        echo "Java version:"
+        java -version
+        echo "Gradle wrapper version:"
+        ./gradlew --version
+        echo "Android SDK info:"
+        echo $ANDROID_HOME
+        echo "Available build tools:"
+        ls -la $ANDROID_HOME/build-tools/ || echo "Build tools directory not found"
+        echo "Project structure:"
+        find . -name "*.gradle*" -o -name "AndroidManifest.xml" | head -10
+
     - name: Validate Gradle wrapper
       uses: gradle/wrapper-validation-action@v1
 
     - name: Run tests
-      run: ./gradlew test
+      run: ./gradlew test --stacktrace --info --scan
 
     - name: Build ${{ matrix.build-type }} APK
-      run: ./gradlew assemble${{ matrix.build-type == 'debug' && 'Debug' || 'Release' }}
+      run: ./gradlew assemble${{ matrix.build-type == 'debug' && 'Debug' || 'Release' }} --stacktrace --info --scan
 
     - name: Upload ${{ matrix.build-type }} APK
       uses: actions/upload-artifact@v4
@@ -59,8 +75,23 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: build-reports-${{ matrix.build-type }}
-        path: app/build/reports/
+        path: |
+          app/build/reports/
+          app/build/outputs/logs/
+          build/reports/
+          ~/.gradle/daemon/
+          gradle/wrapper/
         retention-days: 7
+
+    - name: Show build logs on failure
+      if: failure()
+      run: |
+        echo "=== Gradle daemon logs ==="
+        find ~/.gradle/daemon -name "*.log" -exec echo "File: {}" \; -exec cat {} \; || echo "No daemon logs found"
+        echo "=== Build reports ==="
+        find . -name "*.log" -path "*/build/*" -exec echo "File: {}" \; -exec cat {} \; || echo "No build logs found"
+        echo "=== Compilation errors ==="
+        find . -name "*.txt" -path "*/build/tmp/*" -exec echo "File: {}" \; -exec cat {} \; || echo "No compilation logs found"
 
   release:
     if: github.ref == 'refs/heads/master' && github.event_name == 'push'
