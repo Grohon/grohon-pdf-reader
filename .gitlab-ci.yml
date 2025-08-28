@@ -1,0 +1,60 @@
+image: openjdk:17-jdk
+
+variables:
+  ANDROID_COMPILE_SDK: "34"
+  ANDROID_BUILD_TOOLS: "34.0.0"
+  ANDROID_SDK_TOOLS: "9477386"
+
+before_script:
+  - apt-get --quiet update --yes
+  - apt-get --quiet install --yes wget tar unzip lib32stdc++6 lib32z1
+  - wget --quiet --output-document=android-sdk.zip https://dl.google.com/android/repository/commandlinetools-linux-${ANDROID_SDK_TOOLS}_latest.zip
+  - unzip -d android-sdk-linux android-sdk.zip
+  - echo y | android-sdk-linux/cmdline-tools/bin/sdkmanager --sdk_root=android-sdk-linux "platforms;android-${ANDROID_COMPILE_SDK}" >/dev/null
+  - echo y | android-sdk-linux/cmdline-tools/bin/sdkmanager --sdk_root=android-sdk-linux "platform-tools" >/dev/null
+  - echo y | android-sdk-linux/cmdline-tools/bin/sdkmanager --sdk_root=android-sdk-linux "build-tools;${ANDROID_BUILD_TOOLS}" >/dev/null
+  - export ANDROID_HOME=$PWD/android-sdk-linux
+  - export PATH=$PATH:$ANDROID_HOME/platform-tools/
+  - chmod +x ./gradlew
+
+stages:
+  - build
+  - test
+  - deploy
+
+build_debug:
+  stage: build
+  script:
+    - ./gradlew assembleDebug
+  artifacts:
+    paths:
+      - app/build/outputs/apk/debug/app-debug.apk
+    expire_in: 1 week
+
+build_release:
+  stage: build
+  script:
+    - ./gradlew assembleRelease
+  artifacts:
+    paths:
+      - app/build/outputs/apk/release/app-release-unsigned.apk
+    expire_in: 1 month
+  only:
+    - main
+
+test:
+  stage: test
+  script:
+    - ./gradlew test
+  artifacts:
+    reports:
+      junit: app/build/test-results/test/**/TEST-*.xml
+
+deploy:
+  stage: deploy
+  script:
+    - echo "Deploying application..."
+  dependencies:
+    - build_release
+  only:
+    - main

@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">Grohon PDF Reader</string>
+    <string name="app_logo">App Logo</string>
+    <string name="main_subtitle">Simple and elegant PDF reader for Android</string>
+    <string name="select_pdf_file">Select PDF File</string>
+    <string name="pdf_viewer_title">PDF Viewer</string>
+    <string name="no_recent_files">No recent files</string>
+    <string name="previous_page">Previous Page</string>
+    <string name="next_page">Next Page</string>
+    <string name="zoom_control">Zoom Control</string>
+    <string name="page_info_placeholder">Page 1 of 1</string>
+    <string name="page_info_format">Page %1$d of %2$d</string>
+    <string name="pdf_file_icon">PDF File Icon</string>
+    <string name="pdf_page_content">PDF Page Content</string>
+
+    <!-- Error messages -->
+    <string name="error_opening_file">Error opening PDF file</string>
+    <string name="error_file_not_found">File not found</string>
+    <string name="error_invalid_pdf">Invalid PDF file</string>
+    <string name="error_permission_denied">Permission denied to access file</string>
+
+    <!-- Dialog messages -->
+    <string name="loading">Loading PDF...</string>
+    <string name="rendering_page">Rendering page %1$d...</string>
+
+    <!-- Menu items -->
+    <string name="action_share">Share</string>
+    <string name="action_open_with">Open with</string>
+    <string name="action_file_info">File Info</string>
+
+    <!-- File info -->
+    <string name="file_size_format">%1$.1f %2$s</string>
+    <string name="size_bytes">B</string>
+    <string name="size_kb">KB</string>
+    <string name="size_mb">MB</string>
+    <string name="size_gb">GB</string>
+</resources>

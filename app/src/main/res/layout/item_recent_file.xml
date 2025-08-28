@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/selectableItemBackground"
+    android:padding="16dp">
+
+    <ImageView
+        android:id="@+id/fileIconImageView"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:contentDescription="@string/pdf_file_icon"
+        android:src="@drawable/ic_pdf_file"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/fileNameTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="8dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@color/primary_text_color"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/fileSizeTextView"
+        app:layout_constraintStart_toEndOf="@+id/fileIconImageView"
+        app:layout_constraintTop_toTopOf="@+id/fileIconImageView"
+        tools:text="Sample Document.pdf" />
+
+    <TextView
+        android:id="@+id/filePathTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
+        android:ellipsize="start"
+        android:maxLines="1"
+        android:textColor="@color/secondary_text_color"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toStartOf="@+id/fileSizeTextView"
+        app:layout_constraintStart_toEndOf="@+id/fileIconImageView"
+        app:layout_constraintTop_toBottomOf="@+id/fileNameTextView"
+        tools:text="/storage/emulated/0/Documents/" />
+
+    <TextView
+        android:id="@+id/fileSizeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/secondary_text_color"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/fileIconImageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/fileIconImageView"
+        tools:text="2.5 MB" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

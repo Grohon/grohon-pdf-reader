@@ -1,0 +1,29 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+
+    <!-- Background circle -->
+    <path
+        android:fillColor="@color/primary_color"
+        android:pathData="M60,60m-50,0a50,50 0,1 1,100 0a50,50 0,1 1,-100 0" />
+
+    <!-- PDF icon -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M35,25h50c5.5,0 10,4.5 10,10v50c0,5.5 -4.5,10 -10,10H35c-5.5,0 -10,-4.5 -10,-10V35c0,-5.5 4.5,-10 10,-10z" />
+
+    <!-- PDF text -->
+    <path
+        android:fillColor="@color/primary_color"
+        android:pathData="M42,45h8c3,0 5,2 5,5s-2,5 -5,5h-3v8h-5V45zm5,7h3c1,0 2,-1 2,-2s-1,-2 -2,-2h-3v4z" />
+
+    <path
+        android:fillColor="@color/primary_color"
+        android:pathData="M58,45h8c4,0 7,3 7,9s-3,9 -7,9h-8V45zm5,3v12h3c2,0 3,-2 3,-6s-1,-6 -3,-6h-3z" />
+
+    <path
+        android:fillColor="@color/primary_color"
+        android:pathData="M76,45h12v4h-7v4h6v4h-6v9h-5V45z" />
+</vector>

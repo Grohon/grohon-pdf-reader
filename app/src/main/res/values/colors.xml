@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary_color">#2196F3</color>
+    <color name="primary_dark_color">#1976D2</color>
+    <color name="accent_color">#FF5722</color>
+    <color name="background_color">#FAFAFA</color>
+    <color name="surface_color">#FFFFFF</color>
+    <color name="primary_text_color">#212121</color>
+    <color name="secondary_text_color">#757575</color>
+    <color name="divider_color">#E0E0E0</color>
+
+    <!-- PDF specific colors -->
+    <color name="pdf_background_color">#F5F5F5</color>
+    <color name="pdf_page_background">#FFFFFF</color>
+    <color name="controls_background_color">#FFFFFF</color>
+    <color name="page_number_background">#80000000</color>
+
+    <!-- Status colors -->
+    <color name="success_color">#4CAF50</color>
+    <color name="warning_color">#FF9800</color>
+    <color name="error_color">#F44336</color>
+</resources>
