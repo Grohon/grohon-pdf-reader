@@ -1,5 +1,10 @@
 # Grohon PDF Reader
 
+![Build Status](https://github.com/Grohon/grohon-pdf-reader/actions/workflows/android.yml/badge.svg?branch=master)
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+![Android](https://img.shields.io/badge/Platform-Android-green.svg)
+![Kotlin](https://img.shields.io/badge/Language-Kotlin-blue.svg)
+
 A simple and elegant PDF reader application for Android.
 
 ## Features
@@ -80,4 +85,37 @@ app/src/main/
 
 ## License
 
-This project is created for educational purposes.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Repository
+
+- **GitHub**: https://github.com/Grohon/grohon-pdf-reader
+- **Issues**: https://github.com/Grohon/grohon-pdf-reader/issues
+- **Releases**: https://github.com/Grohon/grohon-pdf-reader/releases
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## Building the App
+
+The app can be built using:
+- **Android Studio** (recommended)
+- **Command line** with Android SDK
+- **GitHub Actions** (automatic builds)
+- **Docker** (containerized builds)
+
+See the detailed build instructions above for each method.
+
+## Support
+
+If you encounter any issues or have questions:
+- Check the [Issues](https://github.com/Grohon/grohon-pdf-reader/issues) page
+- Create a new issue if your problem isn't already reported
+- Review the [Privacy Policy](PRIVACY_POLICY.md) for data handling information
