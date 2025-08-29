@@ -79,13 +79,39 @@ jobs:
         ./gradlew dependencies --configuration releaseCompileClasspath --quiet || true
         ./gradlew dependencies --configuration debugCompileClasspath --quiet || true
 
+    - name: Clean and prepare build
+      run: |
+        echo "Cleaning project for fresh build..."
+        ./gradlew clean --stacktrace
+        echo "Checking project structure..."
+        find app/src/main -name "*.kt" | head -10
+        echo "Checking layout files..."
+        find app/src/main/res/layout -name "*.xml" | head -10
+
     - name: Run tests
       run: ./gradlew test --stacktrace --scan
       env:
         GRADLE_OPTS: "-Dorg.gradle.jvmargs=-Xmx4096m -XX:MaxMetaspaceSize=1024m"
 
     - name: Build ${{ matrix.build-type }} APK
-      run: ./gradlew assemble${{ matrix.build-type == 'debug' && 'Debug' || 'Release' }} --stacktrace --scan
+      run: |
+        echo "Starting build with detailed error reporting..."
+        ./gradlew assemble${{ matrix.build-type == 'debug' && 'Debug' || 'Release' }} --stacktrace --info --scan 2>&1 | tee build-output.log
+        if [ ${PIPESTATUS[0]} -ne 0 ]; then
+          echo "=== BUILD FAILED - Detailed Error Analysis ==="
+          echo "Build output:"
+          cat build-output.log
+          echo ""
+          echo "=== Kotlin Compilation Errors ==="
+          find app/build -name "*.log" -exec echo "File: {}" \; -exec cat {} \; 2>/dev/null || true
+          echo ""
+          echo "=== Generated Files Check ==="
+          find app/build/generated -name "*Binding.java" -o -name "*Binding.kt" | head -10 || true
+          echo ""
+          echo "=== ViewBinding Generation Check ==="
+          ls -la app/build/generated/data_binding_base_class_source_out/ 2>/dev/null || echo "ViewBinding directory not found"
+          exit 1
+        fi
       env:
         GRADLE_OPTS: "-Dorg.gradle.jvmargs=-Xmx4096m -XX:MaxMetaspaceSize=1024m"
 
