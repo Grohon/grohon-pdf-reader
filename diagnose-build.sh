@@ -94,35 +94,35 @@ if [ ${PIPESTATUS[0]} -eq 0 ]; then
     echo "✅ Diagnostic build succeeded!"
 else
     echo "❌ Diagnostic build failed. Analyzing errors..."
-    
+
     echo ""
     echo "🔍 Error Analysis:"
-    
+
     # Look for common error patterns
     if grep -q "cannot find symbol" diagnostic-build.log; then
         echo "❌ Cannot find symbol error detected"
         echo "   This usually indicates missing imports or ViewBinding issues"
     fi
-    
+
     if grep -q "Unresolved reference" diagnostic-build.log; then
         echo "❌ Unresolved reference error detected"
         echo "   Check for missing dependencies or incorrect imports"
     fi
-    
+
     if grep -q "ViewBinding" diagnostic-build.log; then
         echo "❌ ViewBinding error detected"
         echo "   Check layout files and ViewBinding configuration"
     fi
-    
+
     if grep -q "ActivityMainBinding" diagnostic-build.log; then
         echo "❌ ActivityMainBinding error detected"
         echo "   Check activity_main.xml layout file"
     fi
-    
+
     echo ""
     echo "📊 Build artifacts check:"
     find app/build -name "*Binding*" 2>/dev/null | head -5 || echo "No binding files generated"
-    
+
     echo ""
     echo "📄 Last 20 lines of build output:"
     tail -20 diagnostic-build.log
