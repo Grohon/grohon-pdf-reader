@@ -3,13 +3,34 @@ pluginManagement {
         gradlePluginPortal()
         google()
         mavenCentral()
+        // Fallback for any missing plugins
+        maven { url "https://jitpack.io" }
     }
 }
+
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
+        // Primary repositories in order of preference
         google()
         mavenCentral()
+
+        // Additional repositories for better dependency resolution
+        maven { url "https://jitpack.io" }
+        maven { url "https://maven.google.com" }
+
+        // Ensure we can access all AndroidX and Google dependencies
+        maven {
+            url "https://androidx.dev/storage/compose-compiler/repository/"
+            content {
+                includeGroup "androidx.compose.compiler"
+            }
+        }
+    }
+
+    // Enable version catalogs if needed in the future
+    versionCatalogs {
+        // Can be used for dependency management
     }
 }
 
